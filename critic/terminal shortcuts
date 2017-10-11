@@ -1,0 +1,18 @@
+cd critic
+python3
+import pandas as pd
+data=pd.read_csv('test_cases.csv')
+data=data[['url', 'title', 'meanCriticReview', 'meanUserReview', 'numCriticReviews', 'numUserReviews',
+               'fractionUserPositive', 'fractionUserMixed', 'fractionUserNegative', 'fractionCriticPositive',
+               'fractionCriticMixed', 'fractionCriticNegative', 'developer', 'publisher', 'genres', 'releaseDate',
+               'esrb', 'scrapyStatus']]
+data=data.set_index('url')
+data['inspect'] = ''
+data[-16:]
+
+cd critic/critic/spiders
+scrapy crawl 'L INFO -o data.csv metacritic
+
+scrapy shell 'url'
+from bs4 import BeautifulSoup
+import re
